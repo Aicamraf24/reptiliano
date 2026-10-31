@@ -13,9 +13,12 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 9.4.0
+      - name: Descomprimir el mod
+        run: unzip -q reptilia-mod.zip -d proyecto
       - name: Compilar
+        working-directory: proyecto
         run: gradle build --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: reptilia-mod
-          path: build/libs/*.jar
+          path: proyecto/build/libs/*.jar
